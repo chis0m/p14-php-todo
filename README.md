@@ -13,3 +13,8 @@
     php artisan serve
 
 [Complete Tutorial](https://laravel.com/docs/9.x)
+
+
+### Updates 
+- change `.env.sample` to `.env.example`
+- don't forget to install `php-curl`
