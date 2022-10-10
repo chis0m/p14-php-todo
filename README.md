@@ -17,7 +17,7 @@
 
 ### Updates 
 - change `.env.sample` to `.env.example`
-- don't forget to install `php-curl`
+- don't forget to install `php-curl` in JenkinsServer
 
 ### Important to Note
 I am using the same database for real data and test. So all data will be missing after runnning php test. This is because the setup clears the database in order to run each test instance
