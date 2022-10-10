@@ -32,6 +32,7 @@ Route::get('/home', function () {
 
 /**
  * Wrong way of writing the code
+ * But due to the project we do it this way to create more static errors
  */
 Route::group(['middleware' => ['web']], function () {
     /**
