@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 |
 */
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -25,7 +25,7 @@ Route::get('/home', function () {
  * Proper way of writing the code
  */
 Route::group(['middleware' => ['web']], function () {
-   Route::get('/', [TaskController::class, 'index']);               // Show task dashboard
+   Route::get('/task', [TaskController::class, 'index']);               // Show task dashboard
    Route::post('/task', [TaskController::class, 'store']);          // Add new task
    Route::delete('/task/{task}', [TaskController::class, 'destroy']); // Delete task
 });
