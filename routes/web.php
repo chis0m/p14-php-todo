@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Validator;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome to version 1');
 });
 
 /**
