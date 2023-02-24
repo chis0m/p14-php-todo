@@ -45,7 +45,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
-      id: build-image
+      id: build_image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: gitops
@@ -68,4 +68,4 @@ jobs:
         git add .
         git commit -m "Deploying latest image"
         git pull --rebase && git push origin master
-      if: steps.image_build.outcome == 'success'     
+      if: steps.build_image.outcome == 'success'     
