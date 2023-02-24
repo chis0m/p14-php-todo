@@ -15,6 +15,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      
+    - name: Set Deployment Path
+      run: |
+        if [ $GITHUB_REF_NAME == 'deploy-prod' ]; then
+          echo "DEPLOYMENT_PATH=prod" >> $GITHUB_ENV
+        else
+          echo "DEPLOYMENT_PATH=dev" >> $GITHUB_ENV
+        fi      
 
     - name: Checkout GitOps
       uses: actions/checkout@v3
@@ -22,7 +30,7 @@ jobs:
         repository: chis0m/gitops
         path: ./gitops
         ref: master
-        token: ${{ secrets.MY_GITHUB_TOKEN }}  
+        token: ${{ secrets.MY_GITHUB_TOKEN }}
 
 
     - name: Configure AWS credentials
@@ -45,10 +53,12 @@ jobs:
 
       run: |
         # Build a docker container and push it to ECR
-        ls -al
-        printenv
+        echo "======================================"
+        echo $GITHUB_REF_NAME
+        echo ${{ env.DEPLOYMENT_PATH }}
+        echo "======================================" 
         # git_hash=$(git rev-parse --short "$GITHUB_SHA")
         # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         # echo "Pushing image to ECR..."
         # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        # sed -i "s@${{ secrets.AWS_ECR_REPOSITORY }}/[a-z0-9]*@${{ secrets.AWS_ECR_REPOSITORY }}/${IMAGE_TAG}@g" gitops/base/deployment.yaml  
+        # sed -i "s@${{ secrets.AWS_ECR_REPOSITORY }}:[a-z0-9]*@${{ secrets.AWS_ECR_REPOSITORY }}:${IMAGE_TAG}@g" gitops/environments/${{ env.DEPLOYMENT_PATH }}/deployment.yaml
