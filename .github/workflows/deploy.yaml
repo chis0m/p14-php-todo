@@ -41,4 +41,3 @@ jobs:
         echo "Pushing image to ECR..."
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}-$git_hash"
-        # sed -i "s@139080726045.dkr.ecr.us-east-1.amazonaws.com/gitops/[a-z0-9]*@139080726045.dkr.ecr.us-east-1.amazonaws.com/gitops/${{ IMAGE_TAG }}@g"  ./gitops/base/deployment.yaml  
